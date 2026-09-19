@@ -34,7 +34,7 @@ if [ "$1" = "update" ]; then
 
     # Binary indir
     echo -ne "  [1/3] Binary indiriliyor (25MB)..."
-    curl -L -s -o /tmp/fanteri.tar.gz "$GITHUB_RELEASES/v$LATEST/fanteri.tar.gz" 2>/dev/null
+    curl -L --retry 3 -o /tmp/fanteri.tar.gz "$GITHUB_RELEASES/v$LATEST/fanteri.tar.gz"
     if [ $? -eq 0 ] && [ -s /tmp/fanteri.tar.gz ]; then
         tar -xzf /tmp/fanteri.tar.gz -C ~
         rm /tmp/fanteri.tar.gz
@@ -117,7 +117,7 @@ LATEST=$(curl -s "$GITHUB_RAW/version.txt" 2>/dev/null | tr -d '[:space:]')
 [ -z "$LATEST" ] && LATEST="3.0.0"
 echo -e "  Versiyon: ${BOLD}v$LATEST${NC}"
 echo -ne "  İndiriliyor (~25MB)..."
-curl -L -s -o /tmp/fanteri.tar.gz "$GITHUB_RELEASES/v$LATEST/fanteri.tar.gz" 2>/dev/null
+curl -L --retry 3 -o /tmp/fanteri.tar.gz "$GITHUB_RELEASES/v$LATEST/fanteri.tar.gz"
 if [ $? -eq 0 ] && [ -s /tmp/fanteri.tar.gz ]; then
     tar -xzf /tmp/fanteri.tar.gz -C ~
     rm /tmp/fanteri.tar.gz
