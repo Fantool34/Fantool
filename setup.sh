@@ -93,28 +93,28 @@ DOWNLOAD_CSV="/sdcard/Download/CSV.zip"
 
 if [ -f "$REPO_CSV" ]; then
     echo -e "  ${CYAN}CSV.zip repo içinde bulundu, açılıyor...${NC}"
-    unzip -o "$REPO_CSV" -d /tmp/fan_csv/ 2>/dev/null
-    if [ -f "/tmp/fan_csv/CSV/BGMI.csv" ]; then
-        cp "/tmp/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
+    unzip -o "$REPO_CSV" -d $TMPDIR/fan_csv/ 2>/dev/null
+    if [ -f "$TMPDIR/fan_csv/CSV/BGMI.csv" ]; then
+        cp "$TMPDIR/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
         echo -e "  ${GREEN}✅ BGMI.csv → $INDEX_DIR/BGMI.csv${NC}"
     fi
-    if [ -f "/tmp/fan_csv/CSV/PUBG.csv" ]; then
-        cp "/tmp/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
+    if [ -f "$TMPDIR/fan_csv/CSV/PUBG.csv" ]; then
+        cp "$TMPDIR/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
         echo -e "  ${GREEN}✅ PUBG.csv → $INDEX_DIR/PUBG.csv${NC}"
     fi
-    rm -rf /tmp/fan_csv/
+    rm -rf $TMPDIR/fan_csv/
 elif [ -f "$DOWNLOAD_CSV" ]; then
     echo -e "  ${CYAN}CSV.zip Download klasöründe bulundu, açılıyor...${NC}"
-    unzip -o "$DOWNLOAD_CSV" -d /tmp/fan_csv/ 2>/dev/null
-    if [ -f "/tmp/fan_csv/CSV/BGMI.csv" ]; then
-        cp "/tmp/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
+    unzip -o "$DOWNLOAD_CSV" -d $TMPDIR/fan_csv/ 2>/dev/null
+    if [ -f "$TMPDIR/fan_csv/CSV/BGMI.csv" ]; then
+        cp "$TMPDIR/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
         echo -e "  ${GREEN}✅ BGMI.csv kopyalandı${NC}"
     fi
-    if [ -f "/tmp/fan_csv/CSV/PUBG.csv" ]; then
-        cp "/tmp/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
+    if [ -f "$TMPDIR/fan_csv/CSV/PUBG.csv" ]; then
+        cp "$TMPDIR/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
         echo -e "  ${GREEN}✅ PUBG.csv kopyalandı${NC}"
     fi
-    rm -rf /tmp/fan_csv/
+    rm -rf $TMPDIR/fan_csv/
 else
     echo -e "  ${YELLOW}⚠ CSV.zip bulunamadı${NC}"
     echo -e "  ${YELLOW}  CSV.zip'i /sdcard/Download/ klasörüne koy ve tekrar çalıştır${NC}"
