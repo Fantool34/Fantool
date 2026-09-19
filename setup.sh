@@ -133,7 +133,6 @@ if command -v java &>/dev/null; then
     UNLUAC_URL="https://downloads.sourceforge.net/project/unluac/Unstable/unluac_2025_12_23.jar"
     UNLUAC_TMP="/tmp/unluac_patched.jar"
     
-    echo -ne "  İndiriliyor..."
     wget -q "$UNLUAC_URL" -O "$UNLUAC_TMP" 2>/dev/null
     
     if [ -f "$UNLUAC_TMP" ] && [ -s "$UNLUAC_TMP" ]; then
@@ -199,3 +198,10 @@ echo -e "  ${CYAN}python3 fanteri.py${NC}"
 echo ""
 echo "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
+# unluac repodan kopyala
+SCRIPT_DIR2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR2/unluac_patched.jar" ]; then
+  cp "$SCRIPT_DIR2/unluac_patched.jar" /sdcard/Download/FANTOOL/SOURCE/unluac_patched.jar
+  cp "$SCRIPT_DIR2/unluac_patched.jar" /sdcard/Download/FANTOOL/NEW_ENGINE/SOURCE/unluac_patched.jar
+  echo "✅ unluac.jar kopyalandı"
+fi
