@@ -47,12 +47,12 @@ if [ "$1" = "update" ]; then
 
     # CSV güncelle
     echo -ne "  [2/3] CSV güncelleniyor..."
-    wget -q "$GITHUB_RAW/CSV.zip" -O ~/fan_upd_csv.zip 2>/dev/null
+    wget -q "$GITHUB_RAW/CSV.zip" -O $HOME/fan_upd_csv.zip 2>/dev/null
     if [ $? -eq 0 ]; then
-        unzip -o ~/fan_upd_csv.zip -d ~/fan_upd_csv/ > /dev/null 2>&1
-        [ -f $HOME/fan_upd_csv/CSV/BGMI.csv" ] && cp $HOME/fan_upd_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
-        [ -f $HOME/fan_upd_csv/CSV/PUBG.csv" ] && cp $HOME/fan_upd_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
-        rm -rf ~/fan_upd_csv.zip ~/fan_upd_csv/
+        unzip -o $HOME/fan_upd_csv.zip -d $HOME/fan_upd_csv/ > /dev/null 2>&1
+        [ -f "$HOME/fan_upd_csv/CSV/BGMI.csv" ] && cp "$HOME/fan_upd_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
+        [ -f "$HOME/fan_upd_csv/CSV/PUBG.csv" ] && cp "$HOME/fan_upd_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
+        rm -rf $HOME/fan_upd_csv.zip $HOME/fan_upd_csv/
         echo -e " ${GREEN}✅${NC}"
     else
         echo -e " ${YELLOW}⚠ CSV güncellenemedi${NC}"
@@ -134,18 +134,18 @@ echo -e "${BOLD}${CYAN}[3/4] CSV index dosyaları kuruluyor...${NC}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_CSV="$SCRIPT_DIR/CSV.zip"
 if [ -f "$REPO_CSV" ]; then
-    unzip -o "$REPO_CSV" -d ~/fan_csv/ > /dev/null 2>&1
-    [ -f $HOME/fan_csv/CSV/BGMI.csv" ] && cp $HOME/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv" && echo -e "  ${GREEN}✅ BGMI.csv${NC}""
-    [ -f $HOME/fan_csv/CSV/PUBG.csv" ] && cp $HOME/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv" && echo -e "  ${GREEN}✅ PUBG.csv${NC}""
-    rm -rf ~/fan_csv/
+    unzip -o "$REPO_CSV" -d $HOME/fan_csv/ > /dev/null 2>&1
+    if [ -f "$HOME/fan_csv/CSV/BGMI.csv" ]; then cp "$HOME/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"; echo -e "  ${GREEN}BGMI.csv kuruldu${NC}"; fi
+    if [ -f "$HOME/fan_csv/CSV/PUBG.csv" ]; then cp "$HOME/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"; echo -e "  ${GREEN}PUBG.csv kuruldu${NC}"; fi
+    rm -rf $HOME/fan_csv/
 else
     echo -ne "  GitHub'dan indiriliyor..."
-    wget -q "$GITHUB_RAW/CSV.zip" -O ~/fan_csv.zip 2>/dev/null
+    wget -q "$GITHUB_RAW/CSV.zip" -O $HOME/fan_csv.zip 2>/dev/null
     if [ $? -eq 0 ]; then
-        unzip -o ~/fan_csv.zip -d ~/fan_csv/ > /dev/null 2>&1
-        [ -f $HOME/fan_csv/CSV/BGMI.csv" ] && cp $HOME/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
-        [ -f $HOME/fan_csv/CSV/PUBG.csv" ] && cp $HOME/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
-        rm -rf ~/fan_csv.zip ~/fan_csv/
+        unzip -o $HOME/fan_csv.zip -d $HOME/fan_csv/ > /dev/null 2>&1
+        [ -f "$HOME/fan_csv/CSV/BGMI.csv" ] && cp "$HOME/fan_csv/CSV/BGMI.csv" "$INDEX_DIR/BGMI.csv"
+        [ -f "$HOME/fan_csv/CSV/PUBG.csv" ] && cp "$HOME/fan_csv/CSV/PUBG.csv" "$INDEX_DIR/PUBG.csv"
+        rm -rf $HOME/fan_csv.zip $HOME/fan_csv/
         echo -e " ${GREEN}✅${NC}"
     else
         echo -e " ${YELLOW}⚠ CSV kurulamadı${NC}"
