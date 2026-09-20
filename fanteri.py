@@ -130,7 +130,6 @@ def install_dependencies():
         'gmalg': 'gmalg',
         'colorama': 'colorama',
         'cffi': 'cffi',
-        'six': 'six',
     }
     
     missing = []
