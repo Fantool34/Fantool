@@ -128,7 +128,6 @@ def install_dependencies():
         'pycryptodome': 'Crypto',
         'zstandard': 'zstandard',
         'gmalg': 'gmalg',
-        'requests': 'requests',
         'colorama': 'colorama',
         'cffi': 'cffi',
         'six': 'six',
