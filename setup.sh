@@ -348,7 +348,7 @@ echo -e "  ${BOLD}Durum:${NC}"
 echo ""
 echo -e "  ${BOLD}Başlatmak için:${NC}"
 <<<<<<< HEAD
-echo -e "  ${CYAN}python3 fanteri.bin${NC}"
+echo -e "  ${CYAN}./fanteri.bin${NC}"
 echo ""
 echo "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
