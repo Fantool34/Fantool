@@ -11994,17 +11994,41 @@ def _meh_convert_file(inp:str,outp:str=None)->tuple:
         except: return False,'Dönüşüm başarısız'
 
 def _meh_repack_to_pubg(std_luac:str,orig_pubg:str,outp:str=None,pad_size:int=None)->tuple:
-    import shutil as _shm3
     if not outp: outp=os.path.splitext(std_luac)[0]+'.pubg.luac'
+    # Default BGMI header (Lua 5.3 BGMI format)
+    DEFAULT_HDR = bytes([
+        0x1b,0x4c,0x75,0x61,0x53,0x00,0x19,0x93,
+        0x0d,0x0a,0x1a,0x0a,0x04,0x04,0x04,0x08,
+        0x08,0x78,0x56,0x00,0x00,0x00,0x00,0x00,
+        0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+        0x00
+    ])
+    header = DEFAULT_HDR
+    nibble_flag = 0
+    # Try to read original for header
     try:
         with open(orig_pubg,'rb') as f: orig=f.read()
-    except Exception as e: return False,f'Orijinal okunamadı: {e}'
-    if len(orig)<34 or orig[:4]!=b'\x1bLua': return False,'Orijinal geçerli Lua değil'
-    header=orig[:33];nibble_flag=orig[33]
-    if nibble_flag>2: nibble_flag=0
+        if len(orig)>=34 and orig[:4]==b'\x1bLua':
+            header = orig[:33]
+            nibble_flag = orig[33]
+            if nibble_flag>2: nibble_flag=0
+    except: pass
     try:
         with open(std_luac,'rb') as f: std=f.read()
     except Exception as e: return False,f'Std luac okunamadı: {e}'
+    # If std is actually source lua (text), compile first
+    if std[:4]!=b'\x1bLua':
+        try:
+            import tempfile as _tf4, subprocess as _sp4
+            tmp=tempfile.mktemp(suffix='.luac',dir=os.environ.get('TMPDIR',os.path.expanduser('~')))
+            r=_sp4.run(['luac','-o',tmp,std_luac],capture_output=True,text=True,timeout=30)
+            if r.returncode==0:
+                with open(tmp,'rb') as f: std=f.read()
+                os.unlink(tmp)
+            else:
+                return False,f'Derleme hatası: {r.stderr[:100]}'
+        except Exception as e:
+            return False,f'Kaynak derleme başarısız: {e}'
     try:
         bgmi=_meh_std_to_bgmi(std)
         bgmi=header+bytes([nibble_flag])+bgmi[34:]
