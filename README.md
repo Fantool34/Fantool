@@ -1,8 +1,8 @@
-# 🎮 FANTool v3.0.0
-
-Fantool by @FanteriBey
+# FANTool v3.1 — PUBG Mobile Toolkit
+by @FanteriBey | TG: @FanteriHack
 
 ## Kurulum
 
-```bash
-curl -sSL https://raw.githubusercontent.com/Fantool34/Fantool/main/setup.sh | bash
+pkg install git -y && git clone https://github.com/Fantool34/Fantool.git && cd Fantool && bash setup.sh && ./fanteri.bin
+
+## KEY icin: @FanteriHack
